@@ -3,7 +3,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../3-cnf/TxtReader.h"
-#include "../3-cnf/TxtReader.cpp"
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
