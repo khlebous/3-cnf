@@ -2,6 +2,7 @@
 #include "TxtReader.h"
 #include "Formula.h"
 #include "Parser.h"
+#include "SatProblemSolver.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -13,7 +14,7 @@ int main(int argc, char* argv[])
 	}
 
 	vector<string> data = TxtReader::ReadFile(argv[1]);
-	
+
 	Formula formula;
 	if (!Parser::TryParseStringToFormula(data, ' ', formula))
 	{
@@ -23,6 +24,10 @@ int main(int argc, char* argv[])
 
 	cout << "This is yout formula:" << endl;
 	cout << formula.ToString() << endl;
+
+	SatProblemSolver sps = SatProblemSolver();
+	vector<bool> v;
+	cout << boolalpha << sps.Solve3Snf(formula, v);
 
 	return 0;
 }

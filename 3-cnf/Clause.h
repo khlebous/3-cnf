@@ -70,7 +70,7 @@ public:
 		return ss.str();
 	}
 	
-	State SubstituteTrue(int nr, Clause& c)
+	State SubstituteTrue(int nr, Clause& c) const
 	{
 		vector<int> v;
 

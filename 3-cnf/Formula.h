@@ -45,6 +45,11 @@ public:
 	string ToString() const
 	{
 		std::stringstream ss;
+		if (clauses.size() == 0)
+		{
+			ss << "size == 0";
+			return ss.str();
+		}
 
 		for (size_t i = 0; i < ClausesCount(); i++)
 			{
@@ -55,7 +60,7 @@ public:
 
 		return ss.str();
 	}
-	State SubstituteTrue(int nr, Formula& f)
+	State SubstituteTrue(int nr, Formula& f) const
 	{
 		vector<Clause> v;
 
