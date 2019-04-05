@@ -1,5 +1,7 @@
 #include <iostream>
 #include "TxtReader.h"
+#include "Formula.h"
+#include "Parser.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -10,9 +12,17 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	TxtReader txtReader = TxtReader();
-	vector<string> input = txtReader.ReadFile(argv[1]);
+	vector<string> data = TxtReader::ReadFile(argv[1]);
 	
-	cout << "Hello 3-cnf!" << endl;
+	Formula formula;
+	if (!Parser::TryParseStringToFormula(data, ' ', formula))
+	{
+		cout << "Cannot parse data to formula" << endl;
+		return 0;
+	}
+
+	cout << "This is yout formula:" << endl;
+	cout << formula.ToString() << endl;
+
 	return 0;
 }
