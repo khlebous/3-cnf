@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClauseTests.cpp" />
+    <ClCompile Include="FormulaTests.cpp" />
     <ClCompile Include="StringToClauseParserTests.cpp" />
     <ClCompile Include="StringToFormulaParserTests.cpp" />
     <ClCompile Include="StringToIntParserTests.cpp" />

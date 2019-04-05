@@ -2,7 +2,6 @@
 #include <vector>
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../3-cnf/Parser.h"
 #include "../3-cnf/Clause.h"
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -35,7 +34,7 @@ namespace tests
 			Assert::AreEqual(-3, new_clause[1]);
 		}
 
-		TEST_METHOD(SubstituteTrueWhenThereIsOnlyOneNegatedLitera)
+		TEST_METHOD(SubstituteTrueWhenThereIsOnlyOneNegatedLiteral)
 		{
 			vector<int> v = { -1 };
 			Clause clause(v);
