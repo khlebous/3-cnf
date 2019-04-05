@@ -32,5 +32,11 @@
     <ClInclude Include="Formula.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SatProblemSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,7 +32,7 @@ namespace tests
 			bool canParse = Parser::TryParseStringToFormula(v, ' ', formula);
 
 			Assert::AreEqual(true, canParse);
-			Assert::AreEqual((size_t)4, formula.GetClausesCount());
+			Assert::AreEqual((size_t)4, formula.ClausesCount());
 		}
 
 		TEST_METHOD(TryParseIncorrectVectorOfStringsToFormula)

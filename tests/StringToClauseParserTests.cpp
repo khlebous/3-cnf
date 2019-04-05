@@ -26,7 +26,7 @@ namespace tests
 		bool canParse = Parser::TryParseStringToClause("2", ' ', clause);
 
 		Assert::AreEqual(true, canParse);
-		Assert::AreEqual((size_t)1, clause.GetSize());
+		Assert::AreEqual((size_t)1, clause.Size());
 		Assert::AreEqual(2, clause[0]);
 		}
 
@@ -36,7 +36,7 @@ namespace tests
 			bool canParse = Parser::TryParseStringToClause("  +2 ", ' ', clause);
 
 			Assert::AreEqual(true, canParse);
-			Assert::AreEqual((size_t)1, clause.GetSize());
+			Assert::AreEqual((size_t)1, clause.Size());
 			Assert::AreEqual(2, clause[0]);
 		}
 
@@ -46,7 +46,7 @@ namespace tests
 			bool canParse = Parser::TryParseStringToClause("  +2 1  -3", ' ', clause);
 
 			Assert::AreEqual(true, canParse);
-			Assert::AreEqual((size_t)3, clause.GetSize());
+			Assert::AreEqual((size_t)3, clause.Size());
 			Assert::AreEqual(2, clause[0]);
 			Assert::AreEqual(1, clause[1]);
 			Assert::AreEqual(-3, clause[2]);
