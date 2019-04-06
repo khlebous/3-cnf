@@ -1,11 +1,13 @@
 #pragma once
 #include <vector>
+#include <unordered_set>
 #include <sstream>
 #include "Clause.h"
 using namespace std;
 
 class Formula
 {
+private:
 	vector<Clause> clauses;
 
 public:
@@ -27,7 +29,7 @@ public:
 		clauses.clear();
 	}
 
-	const Clause & operator[](size_t nr) const { return clauses[nr]; }
+	const Clause& operator[](size_t nr) const { return clauses[nr]; }
 	Formula& operator=(const Formula& f)
 	{
 		if (this != &f)
@@ -59,6 +61,15 @@ public:
 			}
 
 		return ss.str();
+	}
+	unordered_set<int> GetLiterals() const
+	{
+		unordered_set<int> literals;
+		for (size_t i = 0; i < clauses.size(); i++)
+			for (size_t j = 0; j < clauses[i].Size(); j++)
+				literals.insert(abs(clauses[i][j]));
+
+		return literals;
 	}
 	State SubstituteTrue(int nr, Formula& f) const
 	{

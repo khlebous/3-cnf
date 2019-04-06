@@ -8,7 +8,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace tests
 {
-	TEST_CLASS(FormulaTests)
+	TEST_CLASS(FormulaSubstitutionTrueTests)
 	{
 	public:
 		TEST_METHOD(SubstituteTrueWhenOneClauseWithOneSameLiteral)

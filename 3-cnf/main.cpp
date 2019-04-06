@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 #include "TxtReader.h"
 #include "Formula.h"
 #include "Parser.h"
@@ -22,12 +23,25 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	cout << "This is yout formula:" << endl;
+	cout << "This is your formula:" << endl;
 	cout << formula.ToString() << endl;
 
 	SatProblemSolver sps = SatProblemSolver();
-	vector<bool> v;
-	cout << boolalpha << sps.Solve3Snf(formula, v);
+	map<int, bool> literalsMap;
+	unordered_set<int> formulaLiterals = formula.GetLiterals();
+	cout << boolalpha << sps.Solve3Snf(formula, literalsMap) << endl;
+	for (auto& x : literalsMap)
+	{
+		formulaLiterals.erase(x.first);
+		std::cout << x.first << "-" << x.second << std::endl;
+	}
+	if (formulaLiterals.size() > 0)
+	{
+		cout << "These literals can be any: ";
+		for (auto l : formulaLiterals)
+			std::cout << l << " ";
+		cout << endl;
+	}
 
 	return 0;
 }
