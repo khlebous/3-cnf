@@ -20,9 +20,9 @@ namespace tests
 			Formula formula(v);
 
 			Formula new_formula;
-			State state = formula.SubstituteTrue(1, new_formula);
+			bool state = formula.SubstituteTrue(1, new_formula);
 
-			Assert::AreEqual(1, static_cast<int>(state));
+			Assert::AreEqual(true, state);
 		}
 
 		TEST_METHOD(SubstituteTrueWhenOneClauseHasOneSameNegateLiteral)
@@ -35,9 +35,9 @@ namespace tests
 			Formula formula(v);
 
 			Formula new_formula;
-			State state = formula.SubstituteTrue(1, new_formula);
+			bool state = formula.SubstituteTrue(1, new_formula);
 
-			Assert::AreEqual(-1, static_cast<int>(state));
+			Assert::AreEqual(false, state);
 		}
 
 		TEST_METHOD(SubstituteTrueWhichSimplifyFormula)
@@ -50,9 +50,9 @@ namespace tests
 			Formula formula(v);
 
 			Formula new_formula;
-			State state = formula.SubstituteTrue(-1, new_formula);
+			bool state = formula.SubstituteTrue(-1, new_formula);
 
-			Assert::AreEqual(0, static_cast<int>(state));
+			Assert::AreEqual(false, state);
 			Assert::AreEqual((size_t)1, new_formula.ClausesCount());
 			Assert::AreEqual(2, new_formula[0][0]);
 			Assert::AreEqual(-3, new_formula[0][1]);
@@ -68,9 +68,9 @@ namespace tests
 			Formula formula(v);
 
 			Formula new_formula;
-			State state = formula.SubstituteTrue(4, new_formula);
+			bool state = formula.SubstituteTrue(4, new_formula);
 
-			Assert::AreEqual(0, static_cast<int>(state));
+			Assert::AreEqual(false, state);
 			Assert::AreEqual((size_t)2, new_formula.ClausesCount());
 			Assert::AreEqual(3, new_formula[0][0]);
 			Assert::AreEqual(1, new_formula[1][0]);

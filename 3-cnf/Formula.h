@@ -71,7 +71,7 @@ public:
 
 		return literals;
 	}
-	State SubstituteTrue(int nr, Formula& f) const
+	bool SubstituteTrue(int nr, Formula& f) const
 	{
 		vector<Clause> v;
 
@@ -80,13 +80,11 @@ public:
 			Clause c;
 			switch (clauses[i].SubstituteTrue(nr, c))
 			{
-			case State::NEVER:
-				return State::NEVER;
+			case ClauseState::NEVER:
+				return false;
 				break;
-			case State::UNKNOWN:
+			case ClauseState::UNKNOWN:
 				v.push_back(c);
-				break;
-			case State::ALWAYS:
 				break;
 			default:
 				break;
@@ -94,10 +92,10 @@ public:
 		}
 
 		if (v.size() == 0)
-			return State::ALWAYS;
+			return true;
 
 		f = Formula(v);
 
-		return State::UNKNOWN;
+		return false;
 	}
 };

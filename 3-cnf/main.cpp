@@ -29,7 +29,12 @@ int main(int argc, char* argv[])
 	SatProblemSolver sps = SatProblemSolver();
 	map<int, bool> literalsMap;
 	unordered_set<int> formulaLiterals = formula.GetLiterals();
-	cout << boolalpha << sps.Solve3Snf(formula, literalsMap) << endl;
+	bool isSat = sps.Solve3Snf(formula, literalsMap);
+	cout << boolalpha << isSat << endl;
+
+	if (!isSat)
+		return 0;
+
 	for (auto& x : literalsMap)
 	{
 		formulaLiterals.erase(x.first);

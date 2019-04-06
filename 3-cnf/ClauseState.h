@@ -1,6 +1,6 @@
 #pragma once
 
-enum State
+enum ClauseState
 {
 	NEVER = -1,
 	UNKNOWN = 0,

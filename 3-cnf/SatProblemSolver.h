@@ -35,9 +35,7 @@ private:
 		cout << endl;
 		switch (f.SubstituteTrue(c[0], f_x))
 		{
-		case State::NEVER:
-			break;
-		case State::ALWAYS:
+		case ClauseState::ALWAYS:
 			return true;
 			break;
 		default:
@@ -73,9 +71,7 @@ private:
 		cout << f_negx.ToString() << endl;
 		switch (f_negx.SubstituteTrue(c[1], f_negx_y))
 		{
-		case State::NEVER:
-			break;
-		case State::ALWAYS:
+		case ClauseState::ALWAYS:
 			return true;
 			break;
 		default:
@@ -111,9 +107,7 @@ private:
 		cout << f_negx_neg_y_z.ToString() << endl;
 		switch (f_negx_neg_y.SubstituteTrue(c[2], f_negx_neg_y_z))
 		{
-		case State::NEVER:
-			break;
-		case State::ALWAYS:
+		case ClauseState::ALWAYS:
 			return true;
 			break;
 		default:
