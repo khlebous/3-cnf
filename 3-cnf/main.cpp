@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 	map<int, bool> literalsMap;
 	unordered_set<int> formulaLiterals = formula.GetLiterals();
 	bool isSat = sps.Solve3Snf(formula, literalsMap);
-	cout << boolalpha << isSat << endl;
+	cout << "Is sat? " << boolalpha << isSat << endl;
 
 	if (!isSat)
 		return 0;
