@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Enums">
+      <UniqueIdentifier>{9b374baa-3a23-45c5-978c-33a6fe0fa047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Preprocessing">
+      <UniqueIdentifier>{959c8fb5-b857-4286-bc21-64441d3b26fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -20,17 +26,23 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TxtReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Clause.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Formula.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SatProblemSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClauseState.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files\Preprocessing</Filter>
+    </ClInclude>
+    <ClInclude Include="TxtReader.h">
+      <Filter>Header Files\Preprocessing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

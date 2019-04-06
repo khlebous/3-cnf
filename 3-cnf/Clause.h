@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "ClauseState.h"
 using namespace std;
 
 class Clause
@@ -49,7 +50,7 @@ public:
 		return *this;
 	}
 
-	size_t GetSize() const
+	size_t Size() const
 	{
 		return size;
 	}
@@ -57,15 +58,36 @@ public:
 	{
 		std::stringstream ss;
 
-		for (size_t i = 0; i < GetSize(); i++)
+		for (size_t i = 0; i < Size(); i++)
 		{
 			if (literals[i] < 0)
 				ss << "~";
 			ss << abs(literals[i]);
-			if (i != GetSize() - 1)
+			if (i != Size() - 1)
 				ss << " v ";
 		}
 
 		return ss.str();
+	}
+	
+	ClauseState SubstituteTrue(int nr, Clause& c) const
+	{
+		vector<int> v;
+
+		for (size_t i = 0; i < Size(); i++)
+		{
+			if (literals[i] == nr)
+				return ClauseState::ALWAYS;
+
+			if (literals[i] != -nr)
+				v.push_back(literals[i]);
+		}
+		
+		if (v.size() == 0)
+			return ClauseState::NEVER;
+
+		c = Clause(v);
+
+		return ClauseState::UNKNOWN;
 	}
 };
