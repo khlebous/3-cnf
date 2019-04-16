@@ -35,8 +35,7 @@ int main(int argc, char* argv[])
 	if (!isSat)
 		return 0;
 
-	map<int, bool>::iterator it;
-	for (it = literalsMap.begin(); it != literalsMap.end(); it++ )
+	for (auto it = literalsMap.begin(); it != literalsMap.end(); it++ )
 	{
 		formulaLiterals.erase(it->first);
 		std::cout << it->first << "-" << it->second << std::endl;
@@ -44,7 +43,7 @@ int main(int argc, char* argv[])
 	if (formulaLiterals.size() > 0)
 	{
 		cout << "These literals can be any: ";
-		for (auto it1 = formulaLiterals.begin(); it1 != formulaLiterals.end(); it++ )
+		for (auto it1 = formulaLiterals.begin(); it1 != formulaLiterals.end(); it1++ )
 			std::cout << (*it1) << " ";
 		cout << endl;
 	}
