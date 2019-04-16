@@ -8,11 +8,14 @@ using namespace std;
 class Clause
 {
 private:
-	int* literals = NULL;
+	int* literals;
 	size_t size;
 
 public:
-	Clause() {}
+	Clause() 
+	{
+		literals = NULL;
+	}
 	Clause(const vector<int>& v)
 	{
 		if (v.size() < 1 || v.size() > 3)
