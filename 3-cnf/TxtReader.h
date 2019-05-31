@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "TxtReader.h"
 using namespace std; 
 
 class TxtReader
@@ -19,7 +18,7 @@ public:
 
 		if (!file.is_open())
 		{
-			cout << "Cant open the file." << endl;
+			cout << "Cant open the file to read \"" << filename << "\"" << endl;
 			return data;
 		}
 
