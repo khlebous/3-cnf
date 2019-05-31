@@ -15,14 +15,14 @@ public:
 	Formula(vector<Clause>& const _clauses)
 	{
 		clauses.clear();
-		for (auto const &c : _clauses)
-			clauses.push_back(c);
+		for (size_t i = 0; i < _clauses.size(); i++)
+			clauses.push_back(_clauses[i]);
 	}
 	Formula(const Formula & f)
 	{
 		clauses.clear();
-		for (auto const &c : f.clauses)
-			clauses.push_back(c);
+		for (size_t i = 0; i < f.clauses.size(); i++)
+			clauses.push_back(f.clauses[i]);
 	}
 	~Formula()
 	{
@@ -36,8 +36,8 @@ public:
 		{
 			clauses.clear();
 
-			for (auto const &c : f.clauses)
-				clauses.push_back(c);
+			for (size_t i = 0; i < f.clauses.size(); i++)
+				clauses.push_back(f.clauses[i]);
 		}
 		
 		return *this;

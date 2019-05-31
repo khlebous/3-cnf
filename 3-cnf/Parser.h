@@ -89,10 +89,10 @@ public:
 			return false;
 
 		vector<Clause> clauses;
-		for (auto const& s : data)
+		for (size_t i = 0; i < data.size(); i++)
 		{
 			Clause clause;
-			if (!TryParseStringToClause(s, delemiter, clause))
+			if (!TryParseStringToClause(data[i], delemiter, clause))
 				return false;
 
 			clauses.push_back(clause);
