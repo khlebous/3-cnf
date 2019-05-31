@@ -11,6 +11,27 @@ namespace tests
 	TEST_CLASS(SatProblemSolverTests)
 	{
 	public:
+		bool GetClauseValue(Clause c, map<int, bool> map)
+		{
+			for (size_t i = 0; i < c.Size(); i++)
+			{
+				int iteral = c[i];
+				if (iteral >= 0 && map[iteral] || iteral < 0 && !map[-iteral])
+					return true;
+			}
+
+			return false;
+		}
+
+		bool GetFormulaValue(Formula f, map<int, bool> map)
+		{
+			for (size_t i = 0; i < f.ClausesCount(); i++)
+				if (!GetClauseValue(f[i], map))
+					return false;
+
+			return true;
+		}
+
 		TEST_METHOD(TestFail1)
 		{
 			vector<Clause> v =
@@ -111,9 +132,13 @@ namespace tests
 
 			SatProblemSolver sps = SatProblemSolver();
 			map<int, bool> literalsMap;
-			bool isSat = sps.Solve3Snf(Formula(v), literalsMap);
+			Formula f = Formula(v);
+
+			bool isSat = sps.Solve3Snf(f, literalsMap);
+			bool formulaValue = GetFormulaValue(f, literalsMap);
 
 			Assert::AreEqual(true, isSat);
+			Assert::AreEqual(true, formulaValue);
 		}
 
 		TEST_METHOD(TestPass2)
@@ -127,9 +152,13 @@ namespace tests
 
 			SatProblemSolver sps = SatProblemSolver();
 			map<int, bool> literalsMap;
-			bool isSat = sps.Solve3Snf(Formula(v), literalsMap);
+			Formula f = Formula(v);
+
+			bool isSat = sps.Solve3Snf(f, literalsMap);
+			bool formulaValue = GetFormulaValue(f, literalsMap);
 
 			Assert::AreEqual(true, isSat);
+			Assert::AreEqual(true, formulaValue);
 		}
 
 		TEST_METHOD(TestPass3)
@@ -144,9 +173,13 @@ namespace tests
 
 			SatProblemSolver sps = SatProblemSolver();
 			map<int, bool> literalsMap;
-			bool isSat = sps.Solve3Snf(Formula(v), literalsMap);
+			Formula f = Formula(v);
+
+			bool isSat = sps.Solve3Snf(f, literalsMap);
+			bool formulaValue = GetFormulaValue(f, literalsMap);
 
 			Assert::AreEqual(true, isSat);
+			Assert::AreEqual(true, formulaValue);
 		}
 
 		TEST_METHOD(TestPass4)
@@ -160,9 +193,13 @@ namespace tests
 
 			SatProblemSolver sps = SatProblemSolver();
 			map<int, bool> literalsMap;
-			bool isSat = sps.Solve3Snf(Formula(v), literalsMap);
+			Formula f = Formula(v);
+
+			bool isSat = sps.Solve3Snf(f, literalsMap);
+			bool formulaValue = GetFormulaValue(f, literalsMap);
 
 			Assert::AreEqual(true, isSat);
+			Assert::AreEqual(true, formulaValue);
 		}
 
 		TEST_METHOD(TestPass5)
@@ -180,9 +217,13 @@ namespace tests
 
 			SatProblemSolver sps = SatProblemSolver();
 			map<int, bool> literalsMap;
-			bool isSat = sps.Solve3Snf(Formula(v), literalsMap);
+			Formula f = Formula(v);
+
+			bool isSat = sps.Solve3Snf(f, literalsMap);
+			bool formulaValue = GetFormulaValue(f, literalsMap);
 
 			Assert::AreEqual(true, isSat);
+			Assert::AreEqual(true, formulaValue);
 		}
 	};
 }
