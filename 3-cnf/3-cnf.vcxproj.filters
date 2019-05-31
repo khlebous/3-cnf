@@ -44,5 +44,8 @@
     <ClInclude Include="TxtReader.h">
       <Filter>Header Files\Preprocessing</Filter>
     </ClInclude>
+    <ClInclude Include="TxtWriter.h">
+      <Filter>Header Files\Preprocessing</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

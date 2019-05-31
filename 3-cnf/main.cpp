@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include "TxtReader.h"
+#include "TxtWriter.h"
 #include "Formula.h"
 #include "Parser.h"
 #include "SatProblemSolver.h"
@@ -8,9 +9,9 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
-		cout << "Wrong args count, should be path to .txt file" << endl;
+		cout << "Wrong args count." << endl;
 		return 0;
 	}
 
@@ -30,23 +31,10 @@ int main(int argc, char* argv[])
 	map<int, bool> literalsMap;
 	unordered_set<int> formulaLiterals = formula.GetLiterals();
 	bool isSat = sps.Solve3Snf(formula, literalsMap);
-	cout << "Is sat? " << boolalpha << isSat << endl;
-
-	if (!isSat)
-		return 0;
-
-	for (auto it = literalsMap.begin(); it != literalsMap.end(); it++ )
-	{
-		formulaLiterals.erase(it->first);
-		std::cout << it->first << "-" << it->second << std::endl;
-	}
-	if (formulaLiterals.size() > 0)
-	{
-		cout << "These literals can be any: ";
-		for (auto it1 = formulaLiterals.begin(); it1 != formulaLiterals.end(); it1++ )
-			std::cout << (*it1) << " ";
-		cout << endl;
-	}
+	
+	stringstream outputData = Parser::ParseToStringStream(isSat, formulaLiterals, literalsMap);
+	TxtWriter::WriteToFile(argv[2], outputData);
+	cout << outputData.str();
 
 	return 0;
 }

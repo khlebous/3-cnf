@@ -1,6 +1,8 @@
 #pragma once
 #include "Formula.h"
 #include "Clause.h"
+#include <sstream>
+using namespace std;
 
 class Parser
 {
@@ -11,6 +13,30 @@ private:
 	}
 
 public:
+	static stringstream ParseToStringStream(bool isSat, unordered_set<int> formulaLiterals, const map<int, bool>& literalsMap)
+	{
+		stringstream data;
+
+		data << boolalpha << "Is sat? " << (isSat ? "yes" : "no") << endl;
+
+		if (!isSat)
+			return data;
+
+		for (auto it = literalsMap.begin(); it != literalsMap.end(); it++)
+		{
+			formulaLiterals.erase(it->first);
+			data << it->first << "-" << it->second << std::endl;
+		}
+		if (formulaLiterals.size() > 0)
+		{
+			data << "These literals can be any: ";
+			for (auto it1 = formulaLiterals.begin(); it1 != formulaLiterals.end(); it1++)
+				data << (*it1) << " ";
+			data << endl;
+		}
+
+		return data;
+	}
 
 	static bool TryParseStringToInt(string s, int& i)
 	{
@@ -82,7 +108,7 @@ public:
 		return true;
 	}
 
-	static bool TryParseStringToFormula(vector<string>& const data,	char delemiter,
+	static bool TryParseStringToFormula(vector<string>& const data, char delemiter,
 		Formula& formula)
 	{
 		if (data.size() == 0)
