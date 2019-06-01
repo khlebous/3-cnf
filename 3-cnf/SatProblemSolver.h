@@ -16,38 +16,38 @@ private:
 
 	bool Solve3SnfRec(Formula const& formula, map<int, bool> & literalsMap)
 	{
-		cout << "1. TRY SOLVE FORMULA: " << formula.ToString() << endl;
+		//cout << "1. TRY SOLVE FORMULA: " << formula.ToString() << endl;
 		if (formula.ClausesCount() == 0)
 		{
-			cout << "RETURN FALSE" << endl;
+			//cout << "RETURN FALSE" << endl;
 			return false;
 		}
 
 		Clause clause = formula[0];
 		
 		Formula f_x;
-		cout << "2. Substitute " << to_string(clause[0]) << " as true to formula ";
-		cout << formula.ToString() << endl;
+		//cout << "2. Substitute " << to_string(clause[0]) << " as true to formula ";
+		//cout << formula.ToString() << endl;
 		InsertValueToMap(literalsMap, clause[0]);
-		cout << "Current map: ";
-		for (auto& x : literalsMap)
-			std::cout << x.first << "-" << boolalpha << x.second << " ";
-		cout << endl;
+		//cout << "Current map: ";
+		//for (auto& x : literalsMap)
+		//	std::cout << x.first << "-" << boolalpha << x.second << " ";
+		//cout << endl;
 
 		if (formula.SubstituteTrue(clause[0], f_x))
 			return true;
 
-		cout << "3. Result: " << f_x.ToString() << endl;
-		cout << endl;
-		cout << "4. Try solve formula f_x: " << f_x.ToString() << endl;
-		cout << endl;
+		//cout << "3. Result: " << f_x.ToString() << endl;
+		//cout << endl;
+		//cout << "4. Try solve formula f_x: " << f_x.ToString() << endl;
+		//cout << endl;
 		if (Solve3SnfRec(f_x, literalsMap))
 			return true;
 
 		if (clause.Size() == 1)
 			return false;
 
-		cout << "NOT OK, lets try -x" << endl;
+		//cout << "NOT OK, lets try -x" << endl;
 		literalsMap.erase(clause[0]);
 		Formula f_negx;
 		InsertValueToMap(literalsMap, -clause[0]);
@@ -55,26 +55,26 @@ private:
 		if (!formula.SubstituteTrue(-clause[0], f_negx))
 			return false;
 
-		cout << "5. Substitute " << to_string(-clause[0]) << " as true to formula ";
-		cout << formula.ToString() << endl;
-		cout << "6. Result: " << f_negx.ToString() << endl;
+		//cout << "5. Substitute " << to_string(-clause[0]) << " as true to formula ";
+		//cout << formula.ToString() << endl;
+		//cout << "6. Result: " << f_negx.ToString() << endl;
 
 		Formula f_negx_y;
 		InsertValueToMap(literalsMap, clause[1]);
-		cout << "Current map: ";
-		for (auto& x : literalsMap)
-			std::cout << x.first << "-" << boolalpha << x.second << " ";
-		cout << endl;
-		cout << "7. Substitute " << to_string(clause[1]) << " as true to formula ";
-		cout << f_negx.ToString() << endl;
+		//cout << "Current map: ";
+		//for (auto& x : literalsMap)
+		//	std::cout << x.first << "-" << boolalpha << x.second << " ";
+		//cout << endl;
+		//cout << "7. Substitute " << to_string(clause[1]) << " as true to formula ";
+		//cout << f_negx.ToString() << endl;
 
 		if (f_negx.SubstituteTrue(clause[1], f_negx_y))
 			return true;
 
-		cout << "8. Result: " << f_negx_y.ToString() << endl;
+		//cout << "8. Result: " << f_negx_y.ToString() << endl;
 
-		cout << "9. Try solve formula f_negx_y: " << f_negx_y.ToString() << endl;
-		cout << endl;
+		//cout << "9. Try solve formula f_negx_y: " << f_negx_y.ToString() << endl;
+		//cout << endl;
 
 		if (Solve3SnfRec(f_negx_y, literalsMap))
 			return true;
@@ -83,34 +83,34 @@ private:
 			return false;
 		
 		literalsMap.erase(clause[1]);
-		cout << "NOT OK, lets try -x and -y" << endl;
+		//cout << "NOT OK, lets try -x and -y" << endl;
 
-		cout << "10. Substitute " << to_string(-clause[1]) << " as true to formula ";
-		cout << f_negx.ToString() << endl;
+		//cout << "10. Substitute " << to_string(-clause[1]) << " as true to formula ";
+		//cout << f_negx.ToString() << endl;
 
 		Formula f_negx_neg_y;
 		InsertValueToMap(literalsMap, -clause[1]);
 		if (!f_negx.SubstituteTrue(-clause[1], f_negx_neg_y))
 			return false;
-		cout << "11. Result: " << f_negx_neg_y.ToString();
+		//cout << "11. Result: " << f_negx_neg_y.ToString();
 
 		Formula f_negx_neg_y_z;
 		InsertValueToMap(literalsMap, clause[2]);
 		InsertValueToMap(literalsMap, clause[1]);
 
-		cout << "Current map: ";
-		for (auto& x : literalsMap)
-			std::cout << x.first << "-" << boolalpha << x.second << " ";
-		cout << endl;
-		cout << "12. Substitute " << to_string(clause[2]) << " as true to formula ";
-		cout << f_negx_neg_y_z.ToString() << endl;
+		//cout << "Current map: ";
+		//for (auto& x : literalsMap)
+		//	std::cout << x.first << "-" << boolalpha << x.second << " ";
+		//cout << endl;
+		//cout << "12. Substitute " << to_string(clause[2]) << " as true to formula ";
+		//cout << f_negx_neg_y_z.ToString() << endl;
 
 
 		if (f_negx_neg_y.SubstituteTrue(clause[2], f_negx_neg_y_z))
 			return true;
 
-		cout << "13. Result: " << f_negx_neg_y_z.ToString();
-		cout << "14. Try solve formula f_negx_neg_y_z: " << f_negx_neg_y_z.ToString() << endl;
+		//cout << "13. Result: " << f_negx_neg_y_z.ToString();
+		//cout << "14. Try solve formula f_negx_neg_y_z: " << f_negx_neg_y_z.ToString() << endl;
 		
 		return (Solve3SnfRec(f_negx_neg_y_z, literalsMap));
 	}
