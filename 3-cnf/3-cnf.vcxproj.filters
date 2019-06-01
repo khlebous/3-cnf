@@ -35,9 +35,6 @@
     <ClInclude Include="SatProblemSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClauseState.h">
-      <Filter>Header Files\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="Parser.h">
       <Filter>Header Files\Preprocessing</Filter>
     </ClInclude>
@@ -46,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="TxtWriter.h">
       <Filter>Header Files\Preprocessing</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Enums</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

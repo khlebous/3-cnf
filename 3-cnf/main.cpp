@@ -16,7 +16,11 @@ int main(int argc, char* argv[])
 	}*/
 
 	vector<string> data;// = TxtReader::ReadFile(argv[1]);
-	data.push_back("-3 2 -4");
+	data.push_back("1 2");
+	data.push_back("-1");
+	data.push_back("-1 2");
+
+	/*data.push_back("-3 2 -4");
 	data.push_back("-5 4 2");
 	data.push_back("-1 1 -4");
 	data.push_back("4 -4 -4");
@@ -36,7 +40,7 @@ int main(int argc, char* argv[])
 	data.push_back("1 3 -5");
 	data.push_back("-1 5 3");
 	data.push_back("5 3 -4");
-
+*/
 	Formula formula;
 	if (!Parser::TryParseStringToFormula(data, ' ', formula))
 	{

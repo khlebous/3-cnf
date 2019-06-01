@@ -49,7 +49,7 @@ public:
 		std::stringstream ss;
 		if (clauses.size() == 0)
 		{
-			ss << "size == 0";
+			ss << "Formula is empty";
 			return ss.str();
 		}
 
@@ -71,7 +71,7 @@ public:
 
 		return literals;
 	}
-	bool SubstituteTrue(int nr, Formula& f) const
+	State SubstituteTrue(int nr, Formula& f) const
 	{
 		vector<Clause> v;
 
@@ -80,10 +80,10 @@ public:
 			Clause c;
 			switch (clauses[i].SubstituteTrue(nr, c))
 			{
-			case ClauseState::NEVER:
-				return false;
+			case State::NEVER:
+				return NEVER;
 				break;
-			case ClauseState::UNKNOWN:
+			case State::UNKNOWN:
 				v.push_back(c);
 				break;
 			default:
@@ -92,10 +92,10 @@ public:
 		}
 
 		if (v.size() == 0)
-			return true;
+			return ALWAYS;
 
 		f = Formula(v);
 
-		return false;
+		return UNKNOWN;
 	}
 };
