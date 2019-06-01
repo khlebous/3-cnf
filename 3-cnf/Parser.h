@@ -2,6 +2,7 @@
 #include "Formula.h"
 #include "Clause.h"
 #include <sstream>
+#include <map>
 using namespace std;
 
 class Parser
