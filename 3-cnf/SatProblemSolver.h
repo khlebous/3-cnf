@@ -24,18 +24,21 @@ private:
 		}
 
 		Clause clause = formula[0];
-		
+
 		Formula f_x;
 		//cout << "2. Substitute " << to_string(clause[0]) << " as true to formula ";
 		//cout << formula.ToString() << endl;
 		InsertValueToMap(literalsMap, clause[0]);
 		//cout << "Current map: ";
-		//for (auto& x : literalsMap)
-		//	std::cout << x.first << "-" << boolalpha << x.second << " ";
+		//for (auto& x : literalsMap) cout << x.first << "-" << boolalpha << x.second << " ";
 		//cout << endl;
 
-		if (formula.SubstituteTrue(clause[0], f_x))
-			return true;
+		switch (formula.SubstituteTrue(clause[0], f_x))
+		{
+			case State::NEVER: return false;
+			case State::ALWAYS: return true;
+			default: break;
+		}
 
 		//cout << "3. Result: " << f_x.ToString() << endl;
 		//cout << endl;
@@ -52,8 +55,12 @@ private:
 		Formula f_negx;
 		InsertValueToMap(literalsMap, -clause[0]);
 
-		if (!formula.SubstituteTrue(-clause[0], f_negx))
-			return false;
+		switch (formula.SubstituteTrue(-clause[0], f_negx))
+		{
+			case State::NEVER: return false;
+			case State::ALWAYS: return true;
+			default: break;
+		}
 
 		//cout << "5. Substitute " << to_string(-clause[0]) << " as true to formula ";
 		//cout << formula.ToString() << endl;
@@ -62,14 +69,18 @@ private:
 		Formula f_negx_y;
 		InsertValueToMap(literalsMap, clause[1]);
 		//cout << "Current map: ";
-		//for (auto& x : literalsMap)
-		//	std::cout << x.first << "-" << boolalpha << x.second << " ";
+		//for (auto& x : literalsMap) cout << x.first << "-" << boolalpha << x.second << " ";
 		//cout << endl;
 		//cout << "7. Substitute " << to_string(clause[1]) << " as true to formula ";
 		//cout << f_negx.ToString() << endl;
 
-		if (f_negx.SubstituteTrue(clause[1], f_negx_y))
-			return true;
+		switch (f_negx.SubstituteTrue(clause[1], f_negx_y))
+		{
+			case State::NEVER: return false;
+			case State::ALWAYS: return true;
+			default: break;
+		}
+
 
 		//cout << "8. Result: " << f_negx_y.ToString() << endl;
 
@@ -78,10 +89,10 @@ private:
 
 		if (Solve3SnfRec(f_negx_y, literalsMap))
 			return true;
-		
+
 		if (clause.Size() == 2)
 			return false;
-		
+
 		literalsMap.erase(clause[1]);
 		//cout << "NOT OK, lets try -x and -y" << endl;
 
@@ -90,8 +101,12 @@ private:
 
 		Formula f_negx_neg_y;
 		InsertValueToMap(literalsMap, -clause[1]);
-		if (!f_negx.SubstituteTrue(-clause[1], f_negx_neg_y))
-			return false;
+		switch (f_negx.SubstituteTrue(-clause[1], f_negx_neg_y))
+		{
+			case State::NEVER: return false;
+			case State::ALWAYS: return true;
+			default: break;
+		}
 		//cout << "11. Result: " << f_negx_neg_y.ToString();
 
 		Formula f_negx_neg_y_z;
@@ -99,19 +114,22 @@ private:
 		InsertValueToMap(literalsMap, clause[1]);
 
 		//cout << "Current map: ";
-		//for (auto& x : literalsMap)
-		//	std::cout << x.first << "-" << boolalpha << x.second << " ";
+		//for (auto& x : literalsMap) cout << x.first << "-" << boolalpha << x.second << " ";
 		//cout << endl;
 		//cout << "12. Substitute " << to_string(clause[2]) << " as true to formula ";
 		//cout << f_negx_neg_y_z.ToString() << endl;
 
 
-		if (f_negx_neg_y.SubstituteTrue(clause[2], f_negx_neg_y_z))
-			return true;
+		switch (f_negx_neg_y.SubstituteTrue(clause[2], f_negx_neg_y_z))
+		{
+			case State::NEVER: return false;
+			case State::ALWAYS: return true;
+			default: break;
+		}
 
 		//cout << "13. Result: " << f_negx_neg_y_z.ToString();
 		//cout << "14. Try solve formula f_negx_neg_y_z: " << f_negx_neg_y_z.ToString() << endl;
-		
+
 		return (Solve3SnfRec(f_negx_neg_y_z, literalsMap));
 	}
 
