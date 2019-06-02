@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include "Formula.h"
 #include "Clause.h"
 #include <sstream>

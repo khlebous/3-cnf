@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	map<int, bool> literalsMap;
 	unordered_set<int> formulaLiterals = formula.GetLiterals();
 	bool isSat = sps.Solve3Snf(formula, literalsMap);
-	
+
 	stringstream outputData = Parser::ParseToStringStream(isSat, formulaLiterals, literalsMap);
 	TxtWriter::WriteToFile(argv[2], outputData);
 	cout << outputData.str();

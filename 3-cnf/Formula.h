@@ -39,26 +39,26 @@ public:
 			for (size_t i = 0; i < f.clauses.size(); i++)
 				clauses.push_back(f.clauses[i]);
 		}
-		
+
 		return *this;
 	}
-	
+
 	size_t ClausesCount() const { return clauses.size(); }
 	string ToString() const
 	{
 		std::stringstream ss;
 		if (clauses.size() == 0)
 		{
-			ss << "size == 0";
+			ss << "Formula is empty";
 			return ss.str();
 		}
 
 		for (size_t i = 0; i < ClausesCount(); i++)
-			{
+		{
 			ss << "( " << clauses[i].ToString() << " )";
-				if (i != ClausesCount() -1)
-					ss << " ^ ";
-			}
+			if (i != ClausesCount() - 1)
+				ss << " ^ ";
+		}
 
 		return ss.str();
 	}
@@ -71,7 +71,7 @@ public:
 
 		return literals;
 	}
-	bool SubstituteTrue(int nr, Formula& f) const
+	State SubstituteTrue(int nr, Formula& f) const
 	{
 		vector<Clause> v;
 
@@ -80,10 +80,10 @@ public:
 			Clause c;
 			switch (clauses[i].SubstituteTrue(nr, c))
 			{
-			case ClauseState::NEVER:
-				return false;
+			case State::NEVER:
+				return NEVER;
 				break;
-			case ClauseState::UNKNOWN:
+			case State::UNKNOWN:
 				v.push_back(c);
 				break;
 			default:
@@ -92,10 +92,38 @@ public:
 		}
 
 		if (v.size() == 0)
-			return true;
+			return ALWAYS;
 
 		f = Formula(v);
 
-		return false;
+		return UNKNOWN;
+	}
+	Formula GetSimplified() const
+	{
+		vector<Clause> simplifedClauses;
+		for (size_t i = 0; i < ClausesCount(); i++)
+		{
+			Clause c = clauses[i];
+
+			if (c.Size() > 1 && c[1] == -c[0])
+				continue;
+
+			if (c.Size() > 2 && (c[2] == -c[1] || c[2] == -c[0]))
+				continue;
+
+			vector<int> v;
+
+			v.push_back(c[0]);
+
+			if (c.Size() > 1 && c[1] != c[0])
+				v.push_back(c[1]);
+
+			if (c.Size() > 2 && c[2] != c[1] && c[2] != c[0])
+				v.push_back(c[2]);
+
+			simplifedClauses.push_back(Clause(v));
+		}
+
+		return Formula(simplifedClauses);
 	}
 };

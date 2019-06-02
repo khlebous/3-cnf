@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include "ClauseState.h"
+#include "State.h"
 using namespace std;
 
 class Clause
@@ -73,24 +73,24 @@ public:
 		return ss.str();
 	}
 	
-	ClauseState SubstituteTrue(int nr, Clause& c) const
+	State SubstituteTrue(int nr, Clause& c) const
 	{
 		vector<int> v;
 
 		for (size_t i = 0; i < Size(); i++)
 		{
 			if (literals[i] == nr)
-				return ClauseState::ALWAYS;
+				return State::ALWAYS;
 
 			if (literals[i] != -nr)
 				v.push_back(literals[i]);
 		}
 		
 		if (v.size() == 0)
-			return ClauseState::NEVER;
+			return State::NEVER;
 
 		c = Clause(v);
 
-		return ClauseState::UNKNOWN;
+		return State::UNKNOWN;
 	}
 };
